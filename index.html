@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinetex - Coming Soon</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo {
+      font-size: 3rem;
+      letter-spacing: 5px;
+      color: skyblue;
+    }
+
+    .coming-soon {
+      font-size: 2rem;
+      margin: 10px 0;
+      color: #ffcccb;
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #ddd;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .countdown div {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      min-width: 70px;
+    }
+
+    .countdown span {
+      font-size: 2rem;
+      display: block;
+    }
+
+    .notify-btn {
+      background: #ffcccb;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .notify-btn:hover {
+      background: white;
+      color: #2c5364;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Snowfall effect */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="logo">KINETEX</h1>
+    <h2 class="coming-soon">🎄 Launching This Christmas 🎅</h2>
+    <p class="tagline">Your all-in-one digital workspace</p>
+
+    <!-- Countdown Timer -->
+    <div class="countdown">
+      <div><span id="days">00</span><p>Days</p></div>
+      <div><span id="hours">00</span><p>Hours</p></div>
+      <div><span id="minutes">00</span><p>Minutes</p></div>
+      <div><span id="seconds">00</span><p>Seconds</p></div>
+    </div>
+
+    <!-- Interactive Button -->
+    <button class="notify-btn" onclick="notifyMe()">Notify Me</button>
+  </div>
+
+  <script>
+    // Countdown Timer for Christmas Launch
+    const launchDate = new Date("Dec 25, 2026 00:00:00").getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.querySelector(".countdown").innerHTML = "🎉 Merry Christmas! Kinetex is Live 🚀";
+      }
+    }, 1000);
+
+    // Interactive Button
+    function notifyMe() {
+      alert("Thanks for your interest! We'll notify you when Kinetex launches 🎄🚀");
+    }
+
+    // Snowfall Animation
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * window.innerWidth + "px";
+      snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => {
+        snowflake.remove();
+      }, 5000);
+    }
+
+    setInterval(createSnowflake, 200);
+  </script>
+</body>
+</html>
